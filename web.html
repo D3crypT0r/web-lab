@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Web Development Practical Handbook</title>
+
+<!-- Bootstrap CDN: used in Practical 5 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f4f6f8;
+        color: #202124;
+        line-height: 1.6;
+    }
+    header {
+        background: #172554;
+        color: white;
+        padding: 35px 6%;
+    }
+    header h1 { margin: 0 0 8px; font-size: 36px; }
+    header p { margin: 0; font-size: 18px; }
+    nav {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: #111827;
+        padding: 12px 5%;
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+    nav a {
+        color: white;
+        text-decoration: none;
+        padding: 8px 12px;
+        border-radius: 5px;
+    }
+    nav a:hover { background: #374151; }
+    main {
+        width: 92%;
+        max-width: 1250px;
+        margin: 25px auto;
+    }
+    section {
+        background: white;
+        margin-bottom: 28px;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    }
+    h2 {
+        color: #1d4ed8;
+        border-bottom: 3px solid #1d4ed8;
+        padding-bottom: 8px;
+    }
+    h3 { color: #334155; margin-top: 25px; }
+    .aim {
+        background: #eff6ff;
+        border-left: 5px solid #2563eb;
+        padding: 15px;
+    }
+    .note {
+        background: #fff7ed;
+        border-left: 5px solid #f97316;
+        padding: 15px;
+    }
+    .tip {
+        background: #f0fdf4;
+        border-left: 5px solid #16a34a;
+        padding: 15px;
+    }
+    .file {
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        margin: 18px 0;
+        overflow: hidden;
+    }
+    .file-title {
+        background: #e5e7eb;
+        padding: 10px 15px;
+        font-weight: bold;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+    }
+    pre {
+        margin: 0;
+        padding: 18px;
+        background: #111827;
+        color: #e5e7eb;
+        overflow-x: auto;
+        font-size: 14px;
+        line-height: 1.5;
+    }
+    code { font-family: Consolas, monospace; }
+    button.copy {
+        border: 0;
+        background: #2563eb;
+        color: white;
+        padding: 7px 12px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    button.copy:hover { background: #1d4ed8; }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+    }
+    th, td {
+        border: 1px solid #cbd5e1;
+        padding: 10px;
+        text-align: left;
+    }
+    th { background: #e2e8f0; }
+    .cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+    }
+    .card-demo {
+        padding: 22px;
+        background: #dbeafe;
+        border: 2px solid #60a5fa;
+        border-radius: 8px;
+        text-align: center;
+    }
+    .flex-demo {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        padding: 18px;
+        background: #f1f5f9;
+    }
+    .flex-demo div {
+        flex: 1;
+        min-width: 180px;
+        padding: 25px;
+        background: #bfdbfe;
+        text-align: center;
+    }
+    .grid-demo {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+    }
+    .grid-demo div {
+        padding: 25px;
+        background: #dcfce7;
+        border: 2px solid #22c55e;
+        text-align: center;
+    }
+    footer {
+        background: #172554;
+        color: white;
+        text-align: center;
+        padding: 25px;
+    }
+    @media (max-width: 800px) {
+        .cards, .grid-demo { grid-template-columns: 1fr; }
+        header h1 { font-size: 28px; }
+        section { padding: 20px; }
+    }
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Web Development Practical Handbook</h1>
+    <p>HTML5 • CSS3 • XAMPP/PHP • Flexbox • CSS Grid • Bootstrap</p>
+</header>
+
+<nav>
+    <a href="#p1">1. XAMPP & PHP</a>
+    <a href="#p2">2. HTML5</a>
+    <a href="#p3">3. CSS</a>
+    <a href="#p4">4. Flexbox & Grid</a>
+    <a href="#p5">5. Bootstrap</a>
+    <a href="#mini">Mini Project</a>
+</nav>
+
+<main>
+
+<!-- PRACTICAL 1 -->
+<section id="p1">
+<h2>Practical 1: Install and Configure a Local Web Server</h2>
+
+<div class="aim">
+<strong>Aim:</strong> Install and configure a local web server environment using XAMPP/WAMP/LAMP and test it with basic HTML and PHP pages.
+</div>
+
+<h3>1. What is a Local Web Server?</h3>
+<p>
+A local web server allows us to run and test websites on our own computer
+without uploading them to the Internet. In XAMPP, Apache acts as the web
+server and PHP is processed by the server.
+</p>
+
+<h3>2. XAMPP Folder Structure</h3>
+<table>
+<tr><th>Folder/File</th><th>Purpose</th></tr>
+<tr><td>xampp/htdocs/</td><td>Default folder where website files are stored.</td></tr>
+<tr><td>Apache</td><td>Handles HTTP requests and serves web pages.</td></tr>
+<tr><td>PHP</td><td>Executes server-side PHP code.</td></tr>
+<tr><td>phpMyAdmin</td><td>Web interface for managing MySQL/MariaDB databases.</td></tr>
+</table>
+
+<h3>3. Steps</h3>
+<ol>
+<li>Install XAMPP.</li>
+<li>Open XAMPP Control Panel.</li>
+<li>Start Apache.</li>
+<li>Create a folder such as <strong>web_lab</strong> inside <strong>htdocs</strong>.</li>
+<li>Put your HTML/PHP files inside that folder.</li>
+<li>Open <strong>http://localhost/web_lab/</strong> in a browser.</li>
+</ol>
+
+<div class="file">
+<div class="file-title"><span>File 1 — index.html</span><button class="copy" onclick="copyCode(this)">Copy Code</button></div>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;title&gt;XAMPP HTML Test&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Hello from XAMPP&lt;/h1&gt;
+    &lt;p&gt;Apache is serving this HTML page successfully.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+</div>
+
+<p><strong>Explanation:</strong> Save this as <strong>index.html</strong> inside
+<code>htdocs/web_lab/</code>. Visit <code>http://localhost/web_lab/</code>.</p>
+
+<div class="file">
+<div class="file-title"><span>File 2 — test.php</span><button class="copy" onclick="copyCode(this)">Copy Code</button></div>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;title&gt;PHP Test&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h1&gt;PHP Test&lt;/h1&gt;
+
+&lt;?php
+echo "&lt;p&gt;PHP is working successfully.&lt;/p&gt;";
+echo "&lt;p&gt;Welcome to XAMPP!&lt;/p&gt;";
+?&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+</div>
+
+<p><strong>Explanation:</strong> PHP code is placed between <code>&lt;?php</code>
+and <code>?&gt;</code>. PHP must be processed through a server such as Apache;
+opening the file directly as a normal HTML file will not execute the PHP.</p>
+
+<div class="file">
+<div class="file-title"><span>File 3 — info.php</span><button class="copy" onclick="copyCode(this)">Copy Code</button></div>
+<pre><code>&lt;?php
+phpinfo();
+?&gt;</code></pre>
+</div>
+
+<p><strong>Explanation:</strong> <code>phpinfo()</code> displays information about
+the installed PHP configuration. Open <code>http://localhost/web_lab/info.php</code>.</p>
+
+<div class="tip"><strong>Expected Result:</strong> HTML pages open in the browser and PHP output is generated by Apache/PHP.</div>
+</section>
+
+
+<!-- PRACTICAL 2 -->
+<section id="p2">
+<h2>Practical 2: Create a Web Page Using Semantic HTML5</h2>
+
+<div class="aim">
+<strong>Aim:</strong> Create a basic web page using semantic HTML5 tags, headings, lists, tables, hyperlinks and multimedia elements.
+</div>
+
+<h3>HTML5 Explanation</h3>
+<p>
+HTML (HyperText Markup Language) provides the structure of a webpage.
+Semantic HTML5 elements describe the meaning of the content, making pages
+more understandable and accessible.
+</p>
+
+<table>
+<tr><th>Tag</th><th>Purpose</th></tr>
+<tr><td>&lt;header&gt;</td><td>Introductory/header content.</td></tr>
+<tr><td>&lt;nav&gt;</td><td>Navigation links.</td></tr>
+<tr><td>&lt;main&gt;</td><td>Main content of the page.</td></tr>
+<tr><td>&lt;section&gt;</td><td>Thematic section of content.</td></tr>
+<tr><td>&lt;article&gt;</td><td>Independent content.</td></tr>
+<tr><td>&lt;aside&gt;</td><td>Related/secondary content.</td></tr>
+<tr><td>&lt;footer&gt;</td><td>Footer information.</td></tr>
+</table>
+
+<div class="file">
+<div class="file-title"><span>File 1 — semantic.html</span><button class="copy" onclick="copyCode(this)">Copy Code</button></div>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Semantic HTML5 Page&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;header&gt;
+    &lt;h1&gt;ABC University&lt;/h1&gt;
+    &lt;p&gt;Welcome to our university website.&lt;/p&gt;
+&lt;/header&gt;
+
+&lt;nav&gt;
+    &lt;a href="#about"&gt;About&lt;/a&gt; |
+    &lt;a href="#courses"&gt;Courses&lt;/a&gt; |
+    &lt;a href="#contact"&gt;Contact&lt;/a&gt;
+&lt;/nav&gt;
+
+&lt;main&gt;
+
+    &lt;section id="about"&gt;
+        &lt;h2&gt;About Us&lt;/h2&gt;
+        &lt;p&gt;
+            ABC University provides education in science,
+            technology and management.
+        &lt;/p&gt;
+    &lt;/section&gt;
+
+    &lt;section id="courses"&gt;
+        &lt;h2&gt;Courses&lt;/h2&gt;
+
+        &lt;h3&gt;Unordered List&lt;/h3&gt;
+        &lt;ul&gt;
+            &lt;li&gt;B.Sc. Data Science&lt;/li&gt;
+            &lt;li&gt;BCA&lt;/li&gt;
+            &lt;li&gt;B.Sc. Computer Science&lt;/li&gt;
+        &lt;/ul&gt;
+
+        &lt;h3&gt;Ordered List&lt;/h3&gt;
+        &lt;ol&gt;
+            &lt;li&gt;Learn HTML&lt;/li&gt;
+            &lt;li&gt;Learn CSS&lt;/li&gt;
+            &lt;li&gt;Learn JavaScript&lt;/li&gt;
+        &lt;/ol&gt;
+    &lt;/section&gt;
+
+    &lt;section&gt;
+        &lt;h2&gt;Student Table&lt;/h2&gt;
+
+        &lt;table border="1"&gt;
+            &lt;tr&gt;
+                &lt;th&gt;Name&lt;/th&gt;
+                &lt;th&gt;Course&lt;/th&gt;
+                &lt;th&gt;Semester&lt;/th&gt;
+            &lt;/tr&gt;
+
+            &lt;tr&gt;
+                &lt;td&gt;Rahul&lt;/td&gt;
+                &lt;td&gt;Data Science&lt;/td&gt;
+                &lt;td&gt;3&lt;/td&gt;
+            &lt;/tr&gt;
+
+            &lt;tr&gt;
+                &lt;td&gt;Priya&lt;/td&gt;
+                &lt;td&gt;BCA&lt;/td&gt;
+                &lt;td&gt;3&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/section&gt;
+
+    &lt;section&gt;
+        &lt;h2&gt;Hyperlink&lt;/h2&gt;
+        &lt;a href="https://www.google.com" target="_blank"&gt;
+            Visit Google
+        &lt;/a&gt;
+    &lt;/section&gt;
+
+    &lt;section&gt;
+        &lt;h2&gt;Multimedia&lt;/h2&gt;
+
+        &lt;img src="college.jpg"
+             alt="College Building"
+             width="400"&gt;
+
+        &lt;br&gt;&lt;br&gt;
+
+        &lt;audio controls&gt;
+            &lt;source src="audio.mp3" type="audio/mpeg"&gt;
+            Your browser does not support audio.
+        &lt;/audio&gt;
+
+        &lt;br&gt;&lt;br&gt;
+
+        &lt;video width="400" controls&gt;
+            &lt;source src="video.mp4" type="video/mp4"&gt;
+            Your browser does not support video.
+        &lt;/video&gt;
+    &lt;/section&gt;
+
+&lt;/main&gt;
+
+&lt;footer id="contact"&gt;
+    &lt;p&gt;&amp;copy; 2026 ABC University&lt;/p&gt;
+&lt;/footer&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+</div>
+
+<h3>What to Notice</h3>
+<ul>
+<li><code>&lt;h1&gt;</code> is the main heading; <code>&lt;h2&gt;</code> and <code>&lt;h3&gt;</code> create subheadings.</li>
+<li><code>&lt;ul&gt;</code> creates an unordered list and <code>&lt;ol&gt;</code> creates an ordered list.</li>
+<li><code>&lt;table&gt;</code>, <code>&lt;tr&gt;</code>, <code>&lt;th&gt;</code> and <code>&lt;td&gt;</code> create tabular data.</li>
+<li><code>&lt;a&gt;</code> creates hyperlinks.</li>
+<li><code>&lt;img&gt;</code>, <code>&lt;audio&gt;</code> and <code>&lt;video&gt;</code> add multimedia.</li>
+</ul>
+
+<div class="tip"><strong>Result:</strong> A structured HTML5 webpage containing semantic elements, lists, table, hyperlink and multimedia was created.</div>
+</section>
+
+
+<!-- PRACTICAL 3 -->
+<section id="p3">
+<h2>Practical 3: Design Web Pages Using CSS</h2>
+
+<div class="aim">
+<strong>Aim:</strong> Style webpages using CSS selectors, colors, backgrounds, borders, margins, padding and positioning.
+</div>
+
+<h3>What is CSS?</h3>
+<p>
+CSS (Cascading Style Sheets) controls the presentation of HTML elements.
+It can control colors, fonts, spacing, borders, dimensions and positioning.
+</p>
+
+<div class="file">
+<div class="file-title"><span>File 1 — css-demo.html</span><button class="copy" onclick="copyCode(this)">Copy Code</button></div>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;title&gt;CSS Demonstration&lt;/title&gt;
+    &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+    &lt;div class="container"&gt;
+
+        &lt;h1&gt;CSS Styling Example&lt;/h1&gt;
+
+        &lt;p id="intro"&gt;
+            CSS is used to control the appearance of HTML elements.
+        &lt;/p&gt;
+
+        &lt;div class="box"&gt;
+            This box demonstrates the CSS Box Model.
+        &lt;/div&gt;
+
+        &lt;button&gt;Learn More&lt;/button&gt;
+
+    &lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+</div>
+
+<div class="file">
+<div class="file-title"><span>File 2 — style.css</span><button class="copy" onclick="copyCode(this)">Copy Code</button></div>
+<pre><code>/* Element selector */
+body {
+    background-color: #f1f5f9;
+    font-family: Arial, sans-serif;
+}
+
+/* Class selector */
+.container {
+    width: 70%;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: white;
+    border: 2px solid #334155;
+}
+
+/* ID selector */
+#intro {
+    color: #2563eb;
+    font-size: 18px;
+}
+
+/* Class selector */
+.box {
+    background-color: #dbeafe;
+    border: 3px solid #2563eb;
+    margin: 20px;
+    padding: 25px;
+    position: relative;
+    left: 10px;
+}
+
+/* Element selector */
+button {
+    padding: 10px 20px;
+    color: white;
+    background-color: #1d4ed8;
+    border: none;
+    border-radius: 5px;
+}</code></pre>
+</div>
+
+<h3>CSS Selectors</h3>
+<table>
+<tr><th>Selector</th><th>Example</th><th>Meaning</th></tr>
+<tr><td>Element</td><td><code>p { }</code></td><td>Selects all paragraph elements.</td></tr>
+<tr><td>Class</td><td><code>.box { }</code></td><td>Selects elements having class="box".</td></tr>
+<tr><td>ID</td><td><code>#intro { }</code></td><td>Selects the element having id="intro".</td></tr>
+<tr><td>Universal</td><td><code>* { }</code></td><td>Selects all elements.</td></tr>
+</table>
+
+<h3>CSS Box Model</h3>
+<p>
+The CSS Box Model consists of <strong>content → padding → border → margin</strong>.
+Padding creates space inside the border, while margin creates space outside it.
+</p>
+
+<h3>Positioning Example</h3>
+<div class="file">
+<div class="file-title"><span>position.html</span><button class="copy" onclick="copyCode(this)">Copy Code</button></div>
+<pre><code>&lt;style&gt;
+.container {
+    position: relative;
+    height: 200px;
+    border: 2px solid black;
+}
+
+.box {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    padding: 15px;
+    background-color: orange;
+}
+&lt;/style&gt;
+
+&lt;div class="container"&gt;
+    &lt;div class="box"&gt;Positioned Element&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</div>
+
+<div class="tip"><strong>Result:</strong> Web pages were successfully styled using CSS selectors, colors, backgrounds, borders, margins, padding and positioning.</div>
+</section>
+
+
+<!-- PRACTICAL 4 -->
+<section id="p4">
+<h2>Practical 4: Responsive Layout Using Flexbox and CSS Grid</h2>
+
+<div class="aim">
+<strong>Aim:</strong> Design responsive web page layouts using CSS Flexbox and CSS Grid Layout.
+</div>
+
+<h3>Flexbox</h3>
+<p>
+Flexbox is mainly used for arranging elements along one dimension:
+a row or a column. Common properties include <code>display: flex</code>,
+<code>justify-content</code>, <code>align-items</code> and <code>flex-wrap</code>.
+</p>
+
+<div class="file">
+<div class="file-title"><span>File 1 — flexbox.html</span><button class="copy" onclick="copyCode(this)">Copy Code</button></div>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Flexbox Example&lt;/title&gt;
+
+&lt;style&gt;
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.item {
+    flex: 1;
+    min-width: 200px;
+    padding: 30px;
+    background-color: lightblue;
+    text-align: center;
+}
+&lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;h1&gt;Flexbox Layout&lt;/h1&gt;
+
+&lt;div class="container"&gt;
+    &lt;div class="item"&gt;HTML&lt;/div&gt;
+    &lt;div class="item"&gt;CSS&lt;/div&gt;
+    &lt;div class="item"&gt;JavaScript&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+</div>
+
+<h3>Live Flexbox Demonstration</h3>
+<div class="flex-demo">
+    <div>HTML</div>
+    <div>CSS</div>
+    <div>JavaScript</div>
+</div>
+
+<h3>CSS Grid</h3>
+<p>
+CSS Grid is a two-dimensional layout system. It is useful for creating
+rows and columns. <code>grid-template-columns</code> defines the columns
+and <code>gap</code> controls spacing.
+</p>
+
+<div class="file">
+<div class="file-title"><span>File 2 — grid.html</span><button class="copy" onclick="copyCode(this)">Copy Code</button></div>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;CSS Grid Example&lt;/title&gt;
+
+&lt;style&gt;
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.item {
+    padding: 30px;
+    background-color: lightgreen;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+}
+&lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;h1&gt;CSS Grid Layout&lt;/h1&gt;
+
+&lt;div class="container"&gt;
+    &lt;div class="item"&gt;HTML&lt;/div&gt;
+    &lt;div class="item"&gt;CSS&lt;/div&gt;
+    &lt;div class="item"&gt;JavaScript&lt;/div&gt;
+    &lt;div class="item"&gt;PHP&lt;/div&gt;
+    &lt;div class="item"&gt;MySQL&lt;/div&gt;
+    &lt;div class="item"&gt;Bootstrap&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+</div>
+
+<h3>Live Grid Demonstration</h3>
+<div class="grid-demo">
+    <div>HTML</div>
+    <div>CSS</div>
+    <div>JavaScript</div>
+    <div>PHP</div>
+    <div>MySQL</div>
+    <div>Bootstrap</div>
+</div>
+
+<h3>Responsive Media Query</h3>
+<div class="file">
+<div class="file-title"><span>responsive.css</span><button class="copy" onclick="copyCode(this)">Copy Code</button></div>
+<pre><code>/* Desktop: 3 columns */
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+/* Tablet/mobile: 1 column */
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+}</code></pre>
+</div>
+
+<p>
+The media query changes the layout when the screen width becomes 768 pixels
+or less. This is one of the basic techniques used in responsive web design.
+</p>
+
+<div class="tip"><strong>Result:</strong> Responsive layouts were successfully created using Flexbox, CSS Grid and media queries.</div>
+</section>
+
+
+<!-- PRACTICAL 5 -->
+<section id="p5">
+<h2>Practical 5: Responsive Web Page and Forms Using Bootstrap</h2>
+
+<div class="aim">
+<strong>Aim:</strong> Develop responsive web pages and forms using the Bootstrap framework and its components.
+</div>
+
+<h3>What is Bootstrap?</h3>
+<p>
+Bootstrap is a front-end CSS framework that provides ready-to-use responsive
+layouts and components. It includes a grid system, buttons, cards, navigation
+bars, forms, alerts and many other UI components.
+</p>
+
+<div class="file">
+<div class="file-title"><span>File 1 — bootstrap.html</span><button class="copy" onclick="copyCode(this)">Copy Code</button></div>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport"
+          content="width=device-width, initial-scale=1.0"&gt;
+
+    &lt;title&gt;Bootstrap Example&lt;/title&gt;
+
+    &lt;link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;nav class="navbar navbar-dark bg-dark"&gt;
+    &lt;div class="container"&gt;
+        &lt;a class="navbar-brand" href="#"&gt;
+            Student Portal
+        &lt;/a&gt;
+    &lt;/div&gt;
+&lt;/nav&gt;
+
+&lt;div class="container mt-5"&gt;
+
+    &lt;h1 class="text-center mb-4"&gt;
+        Student Registration
+    &lt;/h1&gt;
+
+    &lt;div class="row g-4"&gt;
+
+        &lt;div class="col-md-6"&gt;
+            &lt;div class="card"&gt;
+                &lt;div class="card-body"&gt;
+
+                    &lt;h3 class="card-title"&gt;
+                        Web Development
+                    &lt;/h3&gt;
+
+                    &lt;p class="card-text"&gt;
+                        Learn HTML, CSS, JavaScript,
+                        PHP and Bootstrap.
+                    &lt;/p&gt;
+
+                    &lt;button class="btn btn-primary"&gt;
+                        Learn More
+                    &lt;/button&gt;
+
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class="col-md-6"&gt;
+
+            &lt;form&gt;
+
+                &lt;div class="mb-3"&gt;
+                    &lt;label class="form-label"&gt;
+                        Name
+                    &lt;/label&gt;
+
+                    &lt;input type="text"
+                           class="form-control"
+                           placeholder="Enter your name"
+                           required&gt;
+                &lt;/div&gt;
+
+                &lt;div class="mb-3"&gt;
+                    &lt;label class="form-label"&gt;
+                        Email
+                    &lt;/label&gt;
+
+                    &lt;input type="email"
+                           class="form-control"
+                           placeholder="Enter your email"
+                           required&gt;
+                &lt;/div&gt;
+
+                &lt;div class="mb-3"&gt;
+                    &lt;label class="form-label"&gt;
+                        Course
+                    &lt;/label&gt;
+
+                    &lt;select class="form-select"&gt;
+                        &lt;option&gt;Select Course&lt;/option&gt;
+                        &lt;option&gt;BCA&lt;/option&gt;
+                        &lt;option&gt;B.Sc. Data Science&lt;/option&gt;
+                        &lt;option&gt;Computer Science&lt;/option&gt;
+                    &lt;/select&gt;
+                &lt;/div&gt;
+
+                &lt;button type="submit"
+                        class="btn btn-success"&gt;
+                    Register
+                &lt;/button&gt;
+
+            &lt;/form&gt;
+
+        &lt;/div&gt;
+
+    &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;script
+ src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"&gt;
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+</div>
+
+<h3>Important Bootstrap Classes</h3>
+<table>
+<tr><th>Class</th><th>Purpose</th></tr>
+<tr><td><code>container</code></td><td>Responsive content container.</td></tr>
+<tr><td><code>row</code></td><td>Creates a Bootstrap row.</td></tr>
+<tr><td><code>col-md-6</code></td><td>Creates a half-width column on medium and larger screens.</td></tr>
+<tr><td><code>navbar</code></td><td>Creates a navigation bar.</td></tr>
+<tr><td><code>card</code></td><td>Creates a content card.</td></tr>
+<tr><td><code>btn btn-primary</code></td><td>Creates a primary styled button.</td></tr>
+<tr><td><code>form-control</code></td><td>Styles text input fields.</td></tr>
+<tr><td><code>form-select</code></td><td>Styles select/dropdown controls.</td></tr>
+<tr><td><code>mb-3</code></td><td>Adds bottom margin.</td></tr>
+<tr><td><code>text-center</code></td><td>Centers text.</td></tr>
+</table>
+
+<h3>Responsive Bootstrap Grid</h3>
+<p>
+Bootstrap uses a 12-column grid. For example,
+<code>col-md-6</code> means the element occupies 6 of 12 columns on
+medium and larger screens. On smaller screens, Bootstrap columns normally
+stack unless another breakpoint class is specified.
+</p>
+
+<div class="tip"><strong>Result:</strong> A responsive webpage containing Bootstrap navigation, cards, buttons and a registration form was successfully developed.</div>
+</section>
+
+
+<!-- MINI PROJECT -->
+<section id="mini">
+<h2>Mini Project: Student Registration Portal</h2>
+
+<div class="aim">
+<strong>Objective:</strong> Combine HTML5, CSS3, responsive design and Bootstrap into a small practical project.
+</div>
+
+<p>
+Create a folder named <strong>student-portal</strong> and save the following
+files inside it. This demonstrates how multiple files work together.
+</p>
+
+<h3>Folder Structure</h3>
+<pre><code>student-portal/
+│
+├── index.html
+├── style.css
+└── register.php</code></pre>
+
+<div class="file">
+<div class="file-title"><span>Mini Project — index.html</span><button class="copy" onclick="copyCode(this)">Copy Code</button></div>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport"
+          content="width=device-width, initial-scale=1.0"&gt;
+
+    &lt;title&gt;Student Portal&lt;/title&gt;
+
+    &lt;link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"&gt;
+
+    &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;nav class="navbar navbar-dark bg-primary"&gt;
+    &lt;div class="container"&gt;
+        &lt;span class="navbar-brand"&gt;
+            Student Portal
+        &lt;/span&gt;
+    &lt;/div&gt;
+&lt;/nav&gt;
+
+&lt;main class="container py-5"&gt;
+
+    &lt;div class="row g-4"&gt;
+
+        &lt;div class="col-lg-6"&gt;
+            &lt;h1&gt;Welcome&lt;/h1&gt;
+
+            &lt;p&gt;
+                Register for your preferred academic course.
+            &lt;/p&gt;
+
+            &lt;ul&gt;
+                &lt;li&gt;Simple registration&lt;/li&gt;
+                &lt;li&gt;Responsive design&lt;/li&gt;
+                &lt;li&gt;Bootstrap interface&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
+
+        &lt;div class="col-lg-6"&gt;
+
+            &lt;form action="register.php" method="post"&gt;
+
+                &lt;label class="form-label"&gt;Name&lt;/label&gt;
+                &lt;input type="text"
+                       name="name"
+                       class="form-control mb-3"
+                       required&gt;
+
+                &lt;label class="form-label"&gt;Email&lt;/label&gt;
+                &lt;input type="email"
+                       name="email"
+                       class="form-control mb-3"
+                       required&gt;
+
+                &lt;label class="form-label"&gt;Course&lt;/label&gt;
+
+                &lt;select name="course"
+                        class="form-select mb-3"
+                        required&gt;
+
+                    &lt;option value=""&gt;Select Course&lt;/option&gt;
+                    &lt;option&gt;BCA&lt;/option&gt;
+                    &lt;option&gt;B.Sc. Data Science&lt;/option&gt;
+                    &lt;option&gt;B.Sc. Computer Science&lt;/option&gt;
+
+                &lt;/select&gt;
+
+                &lt;button class="btn btn-primary"
+                        type="submit"&gt;
+                    Register
+                &lt;/button&gt;
+
+            &lt;/form&gt;
+
+        &lt;/div&gt;
+
+    &lt;/div&gt;
+
+&lt;/main&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+</div>
+
+<div class="file">
+<div class="file-title"><span>Mini Project — style.css</span><button class="copy" onclick="copyCode(this)">Copy Code</button></div>
+<pre><code>body {
+    background-color: #f1f5f9;
+    font-family: Arial, sans-serif;
+}
+
+main {
+    min-height: 80vh;
+}
+
+form {
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .1);
+}
+
+h1 {
+    color: #1d4ed8;
+}
+
+@media (max-width: 768px) {
+    main {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}</code></pre>
+</div>
+
+<div class="file">
+<div class="file-title"><span>Mini Project — register.php</span><button class="copy" onclick="copyCode(this)">Copy Code</button></div>
+<pre><code>&lt;?php
+
+$name = htmlspecialchars($_POST["name"] ?? "");
+$email = htmlspecialchars($_POST["email"] ?? "");
+$course = htmlspecialchars($_POST["course"] ?? "");
+
+echo "&lt;!DOCTYPE html&gt;";
+echo "&lt;html&gt;&lt;head&gt;&lt;title&gt;Registration Result&lt;/title&gt;&lt;/head&gt;&lt;body&gt;";
+
+echo "&lt;h1&gt;Registration Successful&lt;/h1&gt;";
+echo "&lt;p&gt;Name: $name&lt;/p&gt;";
+echo "&lt;p&gt;Email: $email&lt;/p&gt;";
+echo "&lt;p&gt;Course: $course&lt;/p&gt;";
+
+echo "&lt;/body&gt;&lt;/html&gt;";
+
+?&gt;</code></pre>
+</div>
+
+<h3>How the Mini Project Works</h3>
+<ol>
+<li>The user opens <strong>index.html</strong>.</li>
+<li>The Bootstrap grid creates a responsive layout.</li>
+<li>The user fills in the registration form.</li>
+<li>The form sends data to <strong>register.php</strong> using the POST method.</li>
+<li>PHP reads the submitted values and displays them.</li>
+</ol>
+
+<div class="note">
+<strong>Important:</strong> The mini project must be placed inside XAMPP's
+<code>htdocs</code> directory and accessed through Apache, for example:
+<code>http://localhost/student-portal/</code>. PHP will not execute if
+<code>index.html</code> or <code>register.php</code> is opened directly from
+the file system.
+</div>
+
+<h3>Overall Practical Learning</h3>
+<table>
+<tr><th>Practical</th><th>Main Skills</th></tr>
+<tr><td>1</td><td>XAMPP, Apache, localhost, PHP</td></tr>
+<tr><td>2</td><td>HTML5, semantic tags, lists, tables, links, multimedia</td></tr>
+<tr><td>3</td><td>CSS selectors, colors, borders, margin, padding, positioning</td></tr>
+<tr><td>4</td><td>Flexbox, Grid, media queries, responsive design</td></tr>
+<tr><td>5</td><td>Bootstrap grid, navbar, cards, buttons and forms</td></tr>
+</table>
+
+</section>
+
+</main>
+
+<footer>
+    <p><strong>Web Development Practical Handbook</strong></p>
+    <p>HTML5 | CSS3 | PHP | Flexbox | CSS Grid | Bootstrap</p>
+</footer>
+
+<script>
+function copyCode(button) {
+    const code = button.parentElement.nextElementSibling.innerText;
+
+    navigator.clipboard.writeText(code).then(function () {
+        const oldText = button.innerText;
+        button.innerText = "Copied!";
+        setTimeout(function () {
+            button.innerText = oldText;
+        }, 1500);
+    }).catch(function () {
+        alert("Copy failed. Please select and copy the code manually.");
+    });
+}
+</script>
+
+</body>
+</html>
